@@ -1,7 +1,13 @@
 # lean-mcp
 
-An MCP server that lets an agent work Lean proofs against the real Lean 4 + Mathlib
-checker, on-device in Termux. Stdlib-only Python.
+An MCP server that lets a coding agent work Lean 4 proofs against the real
+checker, on the device, in Termux. Stdlib-only Python.
+
+An agent writing proofs guesses; the checker knows. The four tools give the
+agent Lean's own answer at each step: errors and goals for a file, a verdict for
+each candidate tactic, lemma search in scope, and a full build as the last gate.
+The Lean server stays warm between calls, so a call does not reload Mathlib.
+The same session also serves the Lean Workbench app over HTTP.
 
 | Tool | What it's for |
 |---|---|
@@ -134,6 +140,11 @@ elan itself must be installed first; the script only replaces
 - **An open document does not see edits to its imports.** Lean sends no "imports out of date"
   message; it reports a false "unknown identifier". The session snapshots source mtimes and
   reopens the document when another source file changed (`DependencyEdit` test).
+
+## About this repository
+
+Developed in a private repository and published here as snapshot commits, so
+the history is short by design.
 
 ## License
 
